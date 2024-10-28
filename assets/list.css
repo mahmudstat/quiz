@@ -85,3 +85,8 @@
         .subcategory:hover {
             background-color: #ffff80; /* Change color on hover */
         }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
