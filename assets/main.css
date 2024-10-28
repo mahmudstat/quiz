@@ -2,8 +2,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #81C784, white);
-            color: white;
+            background: linear-gradient(to bottom left, #00ff00 0%, #ffff00 100%);
+            color: #00131a;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -27,7 +27,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
+            background: linear-gradient(to bottom right, #00ff00 0%, #ffff00 100%);
         }
         header img {
             width: 80px; /* Adjust logo size */
