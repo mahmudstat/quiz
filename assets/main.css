@@ -1,0 +1,135 @@
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #81C784, white);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Quiz-themed background */
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('https://www.transparenttextures.com/patterns/paper.png'), radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1) 50%, transparent 50%);
+            background-size: cover, cover;
+            opacity: 0.1;
+        }
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        header img {
+            width: 80px; /* Adjust logo size */
+            height: auto;
+        }
+        .title-motto {
+            text-align: center;
+            flex-grow: 1;
+        }
+        .title-motto h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .title-motto p {
+            margin: 5px 0 0;
+            font-size: 16px;
+        }
+        nav {
+            display: flex;
+            align-items: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            text-decoration: underline;
+            color: #FFD54F;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .bar {
+            height: 4px;
+            width: 25px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.4s;
+        }
+        .nav-links {
+            display: flex;
+        }
+        .nav-links.hidden {
+            display: none;
+        }
+        .nav-links.active {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .content {
+            text-align: center;
+            padding: 50px;
+            flex-grow: 1;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #FFD54F;
+            border: none;
+            color: #333;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #FFC107;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: relative;
+            width: 100%;
+        }
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: center;
+            }
+            .title-motto {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .nav-links {
+                display: none; /* Hide menu by default on small screens */
+                width: 100%;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-links.active {
+                display: flex; /* Show menu when active */
+                flex-direction: column;
+                align-items: center; /* Center align items */
+            }
+            nav a {
+                margin: 10px 0; /* Vertical spacing for menu items */
+            }
+        }

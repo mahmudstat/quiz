@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Website</title>
+    <link rel="stylesheet" href="assets/main.css">
+    <link rel="stylesheet" href="assets/list.css">
+    <style>
+        /* General body styling to ensure scrollability */
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-y: auto; /* Ensure vertical scroll */
+            font-family: Arial, sans-serif;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div> <!-- Background Pattern -->
+    <header>
+        <img src="assets/img/logo.png" alt="Logo"> <!-- Replace with your logo -->
+        <div class="title-motto">
+            <h1>Bishwo Quiz</h1>
+            <p>Practise Quizzes on Versatile Topics</p>
+        </div>
+        <div class="hamburger" onclick="toggleMenu(event)">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="list.html">All Quizzes</a>
+            <a href="#">About</a>
+        </nav>
+    </header>
+
+    <div class="content">
+        <!-- Horizontal list of categories -->
+        <div class="horizontal-category-list">
+            <div class="horizontal-category" onclick="scrollToCategory('spr')">Spiritual</div>
+            <div class="horizontal-category" onclick="scrollToCategory('spt')">Sports</div>
+            <div class="horizontal-category" onclick="scrollToCategory('eng')">English</div>
+        </div>
+
+        <!-- Nested list section -->
+        <ul class="nested-list">
+            <li class="category" id="spr">
+                <div class="category-title">Spiritual</div>
+                <ul class="subcategory-list">
+                    <li class="subcategory"><a href="q/spiritual/muhammad1.html">Muhammad (PBUH) - Set 01</li>
+                    <li class="subcategory">Subcategory 1.2</li>
+                </ul>
+            </li>
+            <li class="category" id="spt">
+                <div class="category-title">Sports</div>
+                <ul class="subcategory-list">
+                    <li class="subcategory"><a href="q/sports/football1.html">Football - Set 01</a></li>
+                    <li class="subcategory">Subcategory 2.2</li>
+                </ul>
+            </li>
+            <li class="category" id="eng">
+                <div class="category-title">English</div>
+                <ul class="subcategory-list">
+                    <li class="subcategory"><a href="">Vocabulary - Set 01<a/></li>
+                    <li class="subcategory">Subcategory 3.2</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Bishwo Quiz. All rights reserved. Maintained by <a href="https://www.thinkermahmud.com">Abdullah Al Mahmud</a></p>
+    </footer>
+
+    <script>
+        function toggleMenu(event) {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('active');
+            event.stopPropagation();
+        }
+
+        // Close the menu when clicking outside of it on small screens
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+
+            if (window.innerWidth <= 600 && !nav.contains(event.target) && !hamburger.contains(event.target)) {
+                nav.classList.add('hidden');
+                nav.classList.remove('active');
+            }
+        });
+
+        function scrollToCategory(categoryId) {
+            const category = document.getElementById(categoryId);
+            if (category) {
+                category.scrollIntoView({ behavior: 'smooth' }); // Scroll smoothly to the category
+            }
+        }
+    </script>
+</body>
+</html>

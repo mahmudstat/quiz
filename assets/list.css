@@ -1,0 +1,87 @@
+        /* Horizontal category list styling */
+        .horizontal-category-list {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-width: 600px; /* Width aligned with nested list */
+            margin: 0 auto; /* Center it */
+        }
+
+        .horizontal-category {
+            margin: 0 15px;
+            padding: 10px 15px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #007bff;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .horizontal-category:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+         .horizontal-category::before {
+            content: "➤ "; /* Symbol for main categories */
+            color: blue;
+        }
+
+        /* Styles for the nested list */
+        .nested-list {
+            max-width: 600px; /* Limit the width */
+            margin: 0 auto; /* Center it */
+            padding: 0;
+            list-style: none; /* Remove default bullets */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .category {
+            background: #e6ffff;
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-left: 4px solid #007bff;
+            border-radius: 4px;
+        }
+
+        .category-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #000099;
+            cursor: pointer;
+        }
+
+         .category-title::before {
+            content: "⍆ "; /* Symbol for main categories */
+            color: #4CAF50;
+        }
+
+        .subcategory-list {
+            padding-left: 20px; /* Indentation for subcategories */
+            display: block; /* Ensure all subcategories are visible by default */
+        }
+
+        .subcategory {
+            background-color: #adebad;
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            color: #0073e6;
+        }
+
+        .subcategory::before {
+            content: "⌯"; /* Symbol for subcategories */
+            color: black;
+            font-size: 1em;
+            margin-right: 8px;
+        }
+
+        .subcategory:hover {
+            background-color: #ffff80; /* Change color on hover */
+        }
