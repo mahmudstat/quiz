@@ -1,0 +1,102 @@
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            background: linear-gradient(to right, #b3ffff, yellow);
+            padding: 20px;
+            text-align: center;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 60px;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin: 8px 0;
+        }
+        .motto {
+            font-size: 18px;
+            color: #777;
+            margin: 4px 0 20px 0;
+        }
+        .card {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(to bottom, #80ff80, #e6ffe6);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            text-align: center;
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .question-number {
+            font-weight: bold;
+            color: blue;
+            font-size: 20px;
+        }
+        .timer {
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+        }
+        .option {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            border: 2px solid #80ffff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 16px;
+            color: #333;
+        }
+        .option:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .score {
+            font-size: 20px;
+            color: #333;
+            margin-top: 20px;
+        }
+        .result-item {
+            text-align: left;
+            margin-top: 10px;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #333;
+        }
+        .footer a {
+            color: #4CAF50;
+            margin: 0 8px;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        @keyframes flip {
+            from { transform: rotateY(90deg); opacity: 0; }
+            to { transform: rotateY(0); opacity: 1; }
+        }
