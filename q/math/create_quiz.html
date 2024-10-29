@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+    <script src="createQuiz.js" defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        form {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+        input, button {
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Your Quiz</h1>
+    <form id="quiz-form">
+        <input type="text" id="collegeName" placeholder="College Name" required>
+        <input type="text" id="examName" placeholder="Exam Name" required>
+        <input type="text" id="className" placeholder="Class" required>
+        <input type="text" id="subject" placeholder="Subject" required>
+        <input type="text" id="examType" placeholder="Exam Type" required>
+        <input type="text" id="paper" placeholder="Paper" required>
+        <input type="text" id="time" placeholder="Time" required>
+        <input type="text" id="fullMarks" placeholder="Full Marks" required>
+        <input type="text" id="subjectCode" placeholder="Subject Code" required>
+        <input type="text" id="set" placeholder="Set" required>
+        <input type="number" id="numOfQuestions" placeholder="Number of Questions" required>
+        <button type="button" onclick="createQuizHTML()">Create Question</button>
+    </form>
+</body>
+</html>
