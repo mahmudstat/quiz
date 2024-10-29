@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Website</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        #quiz-container {
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            border: 1px solid #000;
+        }
+        header {
+            margin-bottom: 0; /* No extra margin at the bottom */
+        }
+        .header-left {
+            padding-left: 16px;
+        }
+        .header-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .header-box {
+            border: 1px solid #000;
+            padding: 5px 10px;
+            display: inline-block;
+            margin-top: 5px;
+            font-size: 14px; /* Header font size */
+        }
+        .subject-code-grid {
+            display: inline-grid;
+            grid-template-columns: auto auto auto auto;
+            gap: 0; /* No gap for alignment */
+            text-align: center;
+            margin-top: 5px;
+            font-size: 14px; /* Header font size */
+        }
+        .header-details {
+            margin-top: 0; /* Removed extra margin */
+            font-size: 14px; /* Header font size */
+        }
+        .question-title {
+            text-align: left;
+            margin-bottom: 10px;
+            font-size: 13px; /* Question area font size */
+        }
+        .option-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 10px 0;
+            font-size: 13px; /* Question area font size */
+        }
+        .instructions {
+            font-size: 13px; /* Instructions font size */
+            margin-bottom: 20px; /* Space before questions */
+            text-align: center; /* Centered instructions */
+        }
+        .bold {
+            font-weight: bold; /* Bold text */
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <header class="header-left">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                    <h1 style="font-size: 14px;">SYLHET CADET COLLEGE</h1>
+                    <h2 style="font-size: 14px;">TEST EXAMINATION - 2024</h2>
+                </div>
+                <div class="header-right">
+                    <div class="header-box">Set: A</div>
+                    <div class="header-box">
+                        <div class="subject-code-grid">
+                            <div>Subject Code:</div>
+                            <div>1</div>
+                            <div>2</div>
+                            <div>9</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-details">
+                <p style="margin: 0;"><strong>CLASS:</strong> XI</p>
+                <p style="margin: 0;"><strong>STATISTICS (Multiple Choice Questions)</strong></p>
+                <p style="margin: 0;"><strong>FIRST PAPER</strong></p>
+                <p style="margin: 0;"><strong>TIME:</strong> 2 hours & 35 minutes</p>
+                <p style="margin: 0;"><strong>FULL MARKS:</strong> 50</p>
+            </div>
+            <hr>
+        </header>
+
+        <!-- Instructions added here -->
+        <div class="instructions">
+            [N.B. – Answer all the questions. Each question carries ONE mark. Block fully, with a black ball-point pen, the circle of the letter that stands for the correct/best answer in the “Answer sheet” for the Multiple Choice Questions Examination.]<br>
+            <span class="bold">Candidates are asked not to leave any mark or spot on the question paper.</span>
+        </div>
+
+        <div id="questions-section"></div>
+    </div>
+
+    <script>
+        // Function to parse CSV data
+        function parseCSV(data) {
+            const lines = data.split('\n').map(line => line.split(','));
+            const headers = lines[0];
+            const questions = lines.slice(1).map(line => {
+                const questionObj = {};
+                headers.forEach((header, index) => {
+                    questionObj[header.trim()] = line[index]?.trim().replace(/"/g, '');
+                });
+                return questionObj;
+            });
+            return questions.filter(q => q.Question); // Remove any empty questions
+        }
+
+        // Function to display 25 random questions
+        function displayQuestions(questions) {
+            const container = document.getElementById('questions-section');
+            container.innerHTML = ''; // Clear previous content
+
+            // Shuffle and select 25 random questions
+            const shuffledQuestions = questions.sort(() => 0.5 - Math.random()).slice(0, 25);
+            shuffledQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `
+                    <h3 class="question-title">Q${index + 1}. ${q.Question}</h3>
+                    <div class="option-list">
+                        <span>A) ${q.Option1}</span>
+                        <span>B) ${q.Option2}</span>
+                        <span>C) ${q.Option3}</span>
+                        <span>D) ${q.Option4}</span>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+
+            // Trigger MathJax to render the equations
+            MathJax.typeset();
+        }
+
+        // Function to fetch and parse CSV data
+        async function fetchCSV() {
+            const response = await fetch('math.csv'); // Ensure the path is correct
+            const text = await response.text();
+            const questions = parseCSV(text);
+            displayQuestions(questions);
+        }
+
+        // Automatically fetch CSV on load
+        window.onload = fetchCSV;
+    </script>
+</body>
+</html>

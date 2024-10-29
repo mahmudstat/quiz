@@ -71,8 +71,9 @@
 
                 if (userAnswer) {
                     const userValue = userAnswer.value;
+                    const userOption = userAnswer.parentElement.textContent.charAt(0); // Get option A, B, C, or D
                     const questionText = questions[index].Question;
-                    const answerSummary = `<p>${questionText} - Your Answer: \\(${userValue}\\) | Correct Answer: \\(${correctAnswer}\\)</p>`;
+                    const answerSummary = `<p>${questionText} - Your Answer: ${userOption} (\\(${userValue}\\)) | Correct Answer: \\(${correctAnswer}\\)</p>`;
                     resultContainer.innerHTML += answerSummary;
 
                     if (userValue === correctAnswer) {
