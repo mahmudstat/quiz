@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Website</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <h1>Math Quiz</h1>
+    <div id="quiz-container"></div>
+    <button id="submit-quiz" style="display: none;">Submit Quiz</button>
+    <div id="result" style="display: none;"></div>
+
+    <script>
+        // Function to parse CSV data
+        function parseCSV(data) {
+            const lines = data.split('\n').map(line => line.split(','));
+            const headers = lines[0];
+            const questions = lines.slice(1).map(line => {
+                const questionObj = {};
+                headers.forEach((header, index) => {
+                    questionObj[header.trim()] = line[index]?.trim().replace(/"/g, '');
+                });
+                return questionObj;
+            });
+            return questions.filter(q => q.Question); // Remove any empty questions
+        }
+
+        // Function to display the questions
+        function displayQuestions(questions) {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; // Clear previous content
+            const uniqueQuestions = Array.from(new Set(questions.map(JSON.stringify))).map(JSON.parse); // Remove duplicates
+
+            // Start from the 5th question (index 4) and limit to the next 5 questions
+            for (let index = 4; index < uniqueQuestions.length && index < 9; index++) {
+                const q = uniqueQuestions[index];
+                const questionDiv = document.createElement('div');
+                questionDiv.innerHTML = `
+                    <h3>${q.Question}</h3>
+                    <div>
+                        <label><input type="radio" name="question${index}" value="${q.Option1}" data-answer="${q.Answer}"> A. ${q.Option1}</label><br>
+                        <label><input type="radio" name="question${index}" value="${q.Option2}" data-answer="${q.Answer}"> B. ${q.Option2}</label><br>
+                        <label><input type="radio" name="question${index}" value="${q.Option3}" data-answer="${q.Answer}"> C. ${q.Option3}</label><br>
+                        <label><input type="radio" name="question${index}" value="${q.Option4}" data-answer="${q.Answer}"> D. ${q.Option4}</label><br>
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            }
+
+            // Show the submit button once questions are displayed
+            document.getElementById('submit-quiz').style.display = 'block';
+
+            // Trigger MathJax to render the equations
+            MathJax.typeset();
+        }
+
+        // Function to handle quiz submission
+        function submitQuiz(questions) {
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = ''; // Clear previous results
+            let score = 0;
+            const totalQuestions = questions.length;
+
+            // Check user answers
+            for (let index = 4; index < totalQuestions && index < 9; index++) {
+                const userAnswer = document.querySelector(`input[name="question${index}"]:checked`);
+                const correctAnswer = questions[index].Answer;
+
+                if (userAnswer) {
+                    const userValue = userAnswer.value;
+                    const questionText = questions[index].Question;
+                    const answerSummary = `<p>${questionText} - Your Answer: \\(${userValue}\\) | Correct Answer: \\(${correctAnswer}\\)</p>`;
+                    resultContainer.innerHTML += answerSummary;
+
+                    if (userValue === correctAnswer) {
+                        score++;
+                    }
+                } else {
+                    resultContainer.innerHTML += `<p>${questions[index].Question} - Your Answer: None | Correct Answer: \\(${correctAnswer}\\)</p>`;
+                }
+            }
+
+            resultContainer.innerHTML += `<h2>Your Score: ${score} out of ${totalQuestions - 4}</h2>`;
+            resultContainer.style.display = 'block';
+
+            // Trigger MathJax to render the equations in the results
+            MathJax.typeset();
+        }
+
+        // Function to fetch the CSV data
+        async function fetchCSV() {
+            const response = await fetch('math.csv'); // Ensure the path is correct
+            const text = await response.text();
+            const questions = parseCSV(text);
+            displayQuestions(questions);
+
+            // Attach event to the submit button
+            document.getElementById('submit-quiz').addEventListener('click', () => submitQuiz(questions));
+        }
+
+        // Automatically fetch CSV on load
+        window.onload = fetchCSV;
+    </script>
+</body>
+</html>
